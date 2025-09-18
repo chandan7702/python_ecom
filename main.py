@@ -8,7 +8,8 @@ from crud import *
 from schemas import *
 from auth import get_api_key
 
-# Create tables
+
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="E-commerce API", version="1.0.0")
@@ -26,6 +27,7 @@ def read_products(
 
 @app.post("/cart", response_model=Cart)
 def add_to_cart(cart: CartCreate, db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
+    
     # Assume user_id is 1 for simplicity, in real app map from api_key
     user_id = 1
     return add_to_cart(db, user_id, cart)
